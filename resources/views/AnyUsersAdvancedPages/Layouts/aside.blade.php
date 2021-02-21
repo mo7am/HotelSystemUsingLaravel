@@ -94,7 +94,11 @@
 
                 <ul class="treeview-menu">
                     <li class="active"><a href="{{route('RoomType')}}"><i class="fa fa-circle-o"></i> {{__('pageContent.aside_crudRoomType')}}</a></li>
+                    <li ><a href="{{route('Manager.Room.Room')}}"><i class="fa fa-circle-o"></i> {{__('pageContent.aside_crudRoom')}}</a></li>
+
                 </ul>
+
+
 
             </li>
             @endrole
@@ -114,7 +118,7 @@
 
             </li>
 
-            @role('Receptionist')
+            @role('any')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-pie-chart"></i>
@@ -154,7 +158,7 @@
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-pie-chart"></i>
-                    <span>Available Rooms</span>
+                    <span>{{__('pageContent.availableroom')}}</span>
                     @if(App::isLocale('ar'))
                         <span class="pull-left-container">
               <i class="fa fa-angle-right pull-left"></i>
@@ -167,7 +171,7 @@
                     @endif
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{route('rooms')}}"><i class="fa fa-circle-o"></i> Rooms </a></li>
+                    <li><a href="{{route('rooms')}}"><i class="fa fa-circle-o"></i> {{__('pageContent.rooms')}} </a></li>
 
 
 
@@ -176,7 +180,7 @@
             </li>
             @endrole
 
-            @role('Receptionist')
+            @role('any')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-laptop"></i>
@@ -303,10 +307,14 @@
             </li>
 
             @endrole
+
+            @role('any')
             <li class="header">LABELS</li>
             <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
             <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
             <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
+
+            @endrole
         </ul>
     </section>
     <!-- /.sidebar -->

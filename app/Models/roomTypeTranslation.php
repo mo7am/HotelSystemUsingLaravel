@@ -8,7 +8,7 @@ class roomTypeTranslation extends Model
 {
 
 
-    protected $fillable = ['type'];
+    protected $fillable = ['roomtype_id','locale','type'];
 
     public $table = "roomtype_translations";
 }

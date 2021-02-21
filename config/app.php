@@ -13,7 +13,8 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Hotel'),
+    'name_en' => env('APP_NAME_EN', 'Hotel'),
+    'name_ar' => env('APP_NAME_AR', 'فندق'),
 
     /*
     |--------------------------------------------------------------------------

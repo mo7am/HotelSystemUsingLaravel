@@ -9,8 +9,8 @@
         <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
           <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
           	<div class="text">
-	            <p class="breadcrumbs mb-2"><span class="mr-2"><a href="{{url('/index')}}">Home</a></span> <span>About</span></p>
-	            <h1 class="mb-4 bread">About Us</h1>
+	            <p class="breadcrumbs mb-2"><span class="mr-2"><a href="{{route('indexhome')}}">{{__('pageContent.home')}}</a></span> <span>{{__('pageContent.about')}}</span></p>
+	            <h1 class="mb-4 bread">{{__('pageContent.about')}}</h1>
             </div>
           </div>
         </div>
@@ -26,7 +26,7 @@
 		            <div class="block-18 text-center">
 		              <div class="text">
 		                <strong class="number" data-number="50000">0</strong>
-		                <span>Happy Guests</span>
+		                <span>{{__('pageContent.Happy_Guests')}}</span>
 		              </div>
 		            </div>
 		          </div>
@@ -34,7 +34,7 @@
 		            <div class="block-18 text-center">
 		              <div class="text">
 		                <strong class="number" data-number="3000">0</strong>
-		                <span>Rooms</span>
+		                <span>{{__('pageContent.Rooms')}}</span>
 		              </div>
 		            </div>
 		          </div>
@@ -42,7 +42,7 @@
 		            <div class="block-18 text-center">
 		              <div class="text">
 		                <strong class="number" data-number="1000">0</strong>
-		                <span>Staffs</span>
+		                <span>{{__('pageContent.Staffs')}}</span>
 		              </div>
 		            </div>
 		          </div>
@@ -50,7 +50,7 @@
 		            <div class="block-18 text-center">
 		              <div class="text">
 		                <strong class="number" data-number="100">0</strong>
-		                <span>Destination</span>
+		                <span>{{__('pageContent.Destination')}}</span>
 		              </div>
 		            </div>
 		          </div>
@@ -71,13 +71,13 @@
 					<div class="col-md-7 py-5 wrap-about pb-md-5 ftco-animate">
 	          <div class="heading-section heading-section-wo-line pt-md-5 pl-md-5 mb-5">
 	          	<div class="ml-md-0">
-		          	<span class="subheading">Welcome to Deluxe Hotel</span>
-		            <h2 class="mb-4">Welcome To Our Hotel</h2>
+		          	<span class="subheading">{{__('pageContent.welcometoyoudeluxe')}}</span>
+		            <h2 class="mb-4">{{__('pageContent.welcometoyouhotel')}}</h2>
 	            </div>
 	          </div>
 	          <div class="pb-md-5">
-							<p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. But nothing the copy said could convince her and so it didn’t take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their.</p>
-							<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
+							<p>{{__('pageContent.discription1')}}</p>
+							<p>{{__('pageContent.discription2')}}</p>
 							<ul class="ftco-social d-flex">
                 <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
                 <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
@@ -153,7 +153,7 @@
       <div class="container-fluid">
         <div class="row no-gutters justify-content-center pb-5">
           <div class="col-md-7 text-center heading-section ftco-animate">
-            <h2><span>Instagram</span></h2>
+            <h2><span>{{__('pageContent.instagram')}}</span></h2>
           </div>
         </div>
         <div class="row no-gutters">

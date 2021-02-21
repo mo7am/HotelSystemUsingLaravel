@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Deluxe</title>
+    <title>{{__('pageContent.deluxe')}}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -41,25 +41,42 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="{{url('/index')}}">Deluxe</a>
+	      <a class="navbar-brand" href="{{route('indexhome')}}">{{__('pageContent.deluxe')}}</a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item active"><a href="{{route('indexhome')}}" class="nav-link">Home</a></li>
-	          <li class="nav-item"><a href="{{route('Rooms')}}" class="nav-link">Rooms</a></li>
-	          <li class="nav-item"><a href="{{route('Restaurant')}}" class="nav-link">Restaurant</a></li>
-	          <li class="nav-item"><a href="{{route('About')}}" class="nav-link">About</a></li>
-	          <li class="nav-item"><a href="{{route('Blog')}}" class="nav-link">Blog</a></li>
-	          <li class="nav-item"><a href="{{route('Contact')}}" class="nav-link">Contact</a></li>
-                   <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">Sign Up</a></li>
+	          <li class="nav-item active"><a href="{{route('indexhome')}}" class="nav-link">{{__('pageContent.home')}}</a></li>
+	          <li class="nav-item"><a href="{{route('Rooms')}}" class="nav-link">{{__('pageContent.rooms')}}</a></li>
+	          <li class="nav-item"><a href="{{route('Restaurant')}}" class="nav-link">{{__('pageContent.restaurant')}}</a></li>
+	          <li class="nav-item"><a href="{{route('About')}}" class="nav-link">{{__('pageContent.about')}}</a></li>
+	          <li class="nav-item"><a href="{{route('Blog')}}" class="nav-link">{{__('pageContent.blog')}}</a></li>
+	          <li class="nav-item"><a href="{{route('Contact')}}" class="nav-link">{{__('pageContent.contact')}}</a></li>
+              <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">{{__('pageContent.signup')}}</a></li>
+
+                <li class="nav-item dropdown">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        {{__('pageContent.navbar_Language')}} <span class="caret"></span>
+                    </a>
+                    <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+                        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+
+                            <a class="dropdown-item" rel="alternate" hreflang="{{$localeCode}}" href="{{LaravelLocalization::getLocalizedURL($localeCode , null , [] , true)}}"><img src="{{asset('images/flags/'.$localeCode.'.png')}}" width="30px" height="20x">  {{$properties['native']}}</a>
+
+                        @endforeach
+                    </div>
+                </li>
 	        </ul>
+              <input style="display: none" type="text" value="{{LaravelLocalization::setLocale()}}" id="getLocal">
 	      </div>
 	    </div>
 	  </nav>
     <!-- END nav -->
+
+
+
 
   
 
@@ -121,7 +138,7 @@
           <div class="col-md-12 text-center">
 
             <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                {{__('pageContent.footer_copyright')}} &copy;{{__('pageContent.footer_version')}} {{ config('app.name') }} .  {{__('pageContent.footer_Allrights')}}  <i class="icon-heart color-danger" aria-hidden="true"></i>
   <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
           </div>
         </div>
@@ -151,6 +168,6 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="{{URL::asset('designHomePageHotel/js/google-map.js')}}"></script>
   <script src="{{URL::asset('designHomePageHotel/js/main.js')}}"></script>
-    
+    @yield('scripts')
   </body>
 </html>

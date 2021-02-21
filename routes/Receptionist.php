@@ -35,6 +35,16 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middelware' =>['loca
 
     Route::get('/getRoomByType/{roomtype?}/{adult?}',[ReceptionistController::class,'SearchRooms']);
 
+    Route::post('/booknow_forreceptionist',[ReceptionistController::class,'book_now_for_receptionist'])->name('BookNow_forReceptionist');
+
+    Route::get('/searchguest/{key?}/{searchingValue?}',[ReceptionistController::class,'SearchGuest'])->name('SearchGuest');
+
+    Route::get('/searchguest/{key?}/{searchingValue?}',[ReceptionistController::class,'SearchGuest'])->name('SearchGuest');
+
+    Route::get('/checkavailability/{room_id?}',[ReceptionistController::class,'checkavailability'])->name('CheckAvailability');
+
+    Route::post('/book_exist',[ReceptionistController::class,'book_now_for_exist'])->name('BookNow_forExist');
+
 ////////////////////////////End Relations Route//////////////////////////////////
 
 });

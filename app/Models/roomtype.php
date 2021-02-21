@@ -28,5 +28,15 @@ class roomtype extends Model
     public $translatedAttributes = ['type'];
 
 
+    public function getactive(){
+
+        if(app()->getLocale() == 'ar'){
+            return $this -> is_active == 1 ? 'مفعل' : 'غير مفعل';
+        }
+        else if(app()->getLocale() == 'en'){
+            return $this -> is_active == 1 ? 'active' : 'Not Active';
+        }
+
+      }
 
 }

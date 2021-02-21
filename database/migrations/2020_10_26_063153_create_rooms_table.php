@@ -14,7 +14,7 @@ class CreateRoomsTable extends Migration
     public function up()
     {
         Schema::create('rooms', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
            /* $table->integer('roomtype_id')->unsigned();
             $table->integer('TypeOfRoomTypeID')->unsigned();
             $table->integer('state_id')->unsigned();
@@ -24,11 +24,10 @@ class CreateRoomsTable extends Migration
             $table->integer('state_id');
             $table->integer('state_clean_id');
             $table->integer('price');
-            $table->string('price_per');
             $table->integer('MaximumPerson');
             $table->integer('RoomSize');
             $table->integer('BedNumber');
-            $table->string('RoomView');
+            $table->boolean('is_active');
              $table->string('image')->default('img-1.jpg'); 
             $table->timestamps();
         });

@@ -41,6 +41,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'pivot',
     ];
 
     /**
@@ -95,4 +96,8 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\SessionLanguage' , 'user_id' , 'id');
     }
 
+
+    public function rooms(){
+        return $this->belongsToMany('App\Models\room' , 'userrooms' , 'user_id' , 'room_id' , 'id' ,'id');
+    }
 }

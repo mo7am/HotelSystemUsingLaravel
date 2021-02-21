@@ -510,7 +510,7 @@
                     if(data.result == true)
                     {
                         $('ul.nav.nav-tabs a:eq(0)').html('All Users');
-                        $('ul.nav.nav-tabs a:eq(0)').tab('show');
+                       // $('ul.nav.nav-tabs a:eq(0)').tab('show');
                         $('ul.nav.nav-tabs a:eq(1)').html('Add New ');
                         $('ul.nav.nav-tabs a:eq(2)').html('Edit ');
 
@@ -564,7 +564,7 @@
 
                 success : function(data){
                     $('ul.nav.nav-tabs a:eq(0)').html('All Users');
-                    $('ul.nav.nav-tabs a:eq(0)').tab('show');
+                  //  $('ul.nav.nav-tabs a:eq(0)').tab('show');
                     $('ul.nav.nav-tabs a:eq(1)').html('Add New ');
                     $('ul.nav.nav-tabs a:eq(2)').html('Edit ');
 
@@ -616,7 +616,7 @@
 
                     success: function (data) {
                         $('ul.nav.nav-tabs a:eq(0)').html('All Users');
-                        $('ul.nav.nav-tabs a:eq(0)').tab('show');
+                      //  $('ul.nav.nav-tabs a:eq(0)').tab('show');
                         $('ul.nav.nav-tabs a:eq(1)').html('Add New ');
                         $('ul.nav.nav-tabs a:eq(2)').html('Edit ');
                         $("#record_" + user_id).remove();
@@ -651,7 +651,7 @@
             $('ul.nav.nav-tabs a:eq(0)').html('All Users');
             $('ul.nav.nav-tabs a:eq(1)').html('Add New ');
             $('ul.nav.nav-tabs a:eq(2)').html('Edit ');
-            $('ul.nav.nav-tabs a:eq(2)').tab('show');
+          //  $('ul.nav.nav-tabs a:eq(2)').tab('show');
 
 
 
@@ -683,7 +683,7 @@
                 type: "POST",
                 success: function (data) {
                     $('ul.nav.nav-tabs a:eq(0)').html('All Users');
-                    $('ul.nav.nav-tabs a:eq(0)').tab('show');
+                  //  $('ul.nav.nav-tabs a:eq(0)').tab('show');
                     $('ul.nav.nav-tabs a:eq(1)').html('Add New ');
                     $('ul.nav.nav-tabs a:eq(2)').html('Edit ');
                     $("#pageContent").html(data); // here the wrapper is main div
@@ -703,7 +703,7 @@
                 url: '/CrudUsers',
                 success: function (response) {
                     $('ul.nav.nav-tabs a:eq(0)').html('All Users');
-                    $('ul.nav.nav-tabs a:eq(0)').tab('show');
+                   // $('ul.nav.nav-tabs a:eq(0)').tab('show');
                     $('ul.nav.nav-tabs a:eq(1)').html('Add New ');
                     $('ul.nav.nav-tabs a:eq(2)').html('Edit ');
 
@@ -756,7 +756,7 @@
             $('ul.nav.nav-tabs a:eq(0)').html('All Users');
             $('ul.nav.nav-tabs a:eq(1)').html('Add New ');
             $('ul.nav.nav-tabs a:eq(2)').html('Edit ');
-            $('ul.nav.nav-tabs a:eq(2)').tab('show');
+          //  $('ul.nav.nav-tabs a:eq(2)').tab('show');
 
             /* var fname = $('input[name=editfname]').val();
              var mname = $('input[name=editmname]').val();
@@ -1103,7 +1103,7 @@
             $('ul.nav.nav-tabs a:eq(0)').html('All Users');
             $('ul.nav.nav-tabs a:eq(1)').html('Add New ');
             $('ul.nav.nav-tabs a:eq(2)').html('Edit ');
-            $('ul.nav.nav-tabs a:eq(2)').tab('show');
+           // $('ul.nav.nav-tabs a:eq(2)').tab('show');
 
             document.getElementById("numuser").value = $(this).attr('useredit_num');
             document.getElementById("iduser").value = $(this).attr('useredit_id');

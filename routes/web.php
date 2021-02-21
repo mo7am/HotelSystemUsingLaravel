@@ -54,6 +54,11 @@ Route::get('/restaurant', [homePageController::class, 'restaurant'])->name('Rest
 Route::get('/rooms_single', [homePageController::class, 'rooms_single'])->name('Rooms_single');
 Route::get('/rooms', [homePageController::class, 'rooms'])->name('Rooms');
 Route::get('/signup', [homePageController::class, 'signup'])->name('Signup');
+Route::get('/showmorerooms/{skip?}', [homePageController::class, 'showmore'])->name('ShowMore');
+
+    Route::get('/getAvailableRoom',[homePageController::class,'SearchAvailableRooms'])->name('SearchAvailableRooms');
+
+    Route::get('/checkavailabilityroom/{room_id?}',[homePageController::class,'check_availability_room'])->name('CheckAvailabilityRoom');
 
 
 Route::get('/indexAnyUser', [anyUsersController::class, 'indexAnyUser']);

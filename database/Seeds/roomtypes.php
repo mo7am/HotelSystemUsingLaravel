@@ -37,7 +37,7 @@ class roomtypes extends Seeder
 
 
 
-        $add1 = new roomtype;
+       /* $add1 = new roomtype;
         $add1->is_active = 1;
         $add1->save();
 
@@ -59,6 +59,6 @@ class roomtypes extends Seeder
 
         $add7 = new roomtype;
         $add7->is_active = 1;
-        $add7->save();
+        $add7->save();*/
     }
 }

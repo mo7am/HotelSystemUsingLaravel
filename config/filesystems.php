@@ -62,6 +62,13 @@ return [
             'visibility' => 'public',
         ],
 
+        'rooms' => [
+            'driver' => 'local',
+            'root' => base_path(). 'public/images/rooms/',
+            'url' => env('APP_URL').'/public',
+            'visibility' => 'public',
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

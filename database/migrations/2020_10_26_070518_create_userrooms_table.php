@@ -19,6 +19,7 @@ class CreateUserroomsTable extends Migration
             $table->integer('user_id')->unsigned();*/
             $table->integer('room_id');
             $table->integer('user_id');
+            $table->string('phone');
             $table->dateTime('checkindate');
             $table->dateTime('checkoutdate');
             $table->timestamps();

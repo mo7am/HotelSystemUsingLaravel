@@ -77,7 +77,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'type_id' => $data['status'] ,
-            'balance' => 2000,
+            'balance' => 0,
             'stateBlock' => 8,
             'image' => 'img-1.jpg',
             'remember_token' => $remember,
@@ -161,6 +161,8 @@ class RegisterController extends Controller
                 'model_id' => $user->id,
             ]);
         }
+
+
 
         return $user;
     }

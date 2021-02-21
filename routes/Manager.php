@@ -26,6 +26,7 @@ use App\Http\Controllers\SocialController;
 
 */
 
+//define('PAGINATION_COUNT' , 15);
 
 Route::group(['prefix' => LaravelLocalization::setLocale(),'middelware' =>['localeSessionRedirect' , 'localizationRedirect' , 'localeViewPath'] ] , function() {
 
@@ -116,10 +117,25 @@ Route::group(['perfix' => 'user' , 'namespace'=>'Staff'] , function(){
 
     route::get('/roomtype', [ManagerController::class, 'index'])->name('RoomType');
     route::get('create', [ManagerController::class, 'create'])->name('Create');
-    route::post('store', [ManagerController::class, 'store'])->name('Store');
-    route::get('edit/{id}', [ManagerController::class, 'edit'])->name('Edit');
-    route::post('update', [ManagerController::class, 'update'])->name('Update');
-    route::post('delete/{id}', [ManagerController::class, 'delete'])->name('Delete');
+    route::post('/store', [ManagerController::class, 'store'])->name('Manager.TypeRoom.Store');
+    route::get('edit/{id}', [ManagerController::class, 'edit'])->name('Manager.TypeRoom.Edit');
+    route::post('update', [ManagerController::class, 'update'])->name('Manager.TypeRoom.Update');
+    route::get('delete/{id}', [ManagerController::class, 'delete'])->name('Manager.TypeRoom.Delete');
+
+
+
+
+
+
+    route::get('/room', [ManagerController::class, 'indexRoom'])->name('Manager.Room.Room');
+    route::get('Room/create', [ManagerController::class, 'createRoom'])->name('Manager.Room.Create');
+    route::post('Room/store', [ManagerController::class, 'storeRoom'])->name('Manager.Room.Store');
+    route::get('Room/edit/{id}', [ManagerController::class, 'editRoom'])->name('Manager.Room.Edit');
+    route::post('Room/update', [ManagerController::class, 'updateRoom'])->name('Manager.Room.Update');
+    route::post('Room/delete', [ManagerController::class, 'deleteRoom'])->name('Manager.Room.Delete');
+    route::post('Room/activation', [ManagerController::class, 'activationRoom'])->name('Manager.Room.Activation');
+    route::get('Room/getLanguage/{id}', [ManagerController::class, 'getLanguage'])->name('Manager.Room.GetLanguage');
+    route::post('Room/StoreLanguage', [ManagerController::class, 'storeLanguage'])->name('Manager.Room.StoreLanguage');
 
 
 });

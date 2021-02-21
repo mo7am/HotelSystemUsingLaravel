@@ -3,7 +3,12 @@
 <head>
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{{ config('app.name') }} | @if(auth()->user()->type_id == 1 )
+    <title>@if(LaravelLocalization::setLocale() == 'ar')
+        {{ config('app.name_ar') }}
+        @elseif(LaravelLocalization::setLocale() == 'en')
+        {{ config('app.name_en') }}
+        @endif| @if(auth()->user()->type_id == 1 )
+
             {{__('pageContent.navbar_manager')}}
         @elseif(auth()->user()->type_id == 2)
             {{__('pageContent.navbar_receptionist')}}
@@ -17,7 +22,7 @@
             {{__('pageContent.navbar_localguest')}}
         @elseif(auth()->user()->type_id == 7)
             {{__('pageContent.navbar_foreignguist')}}
-        @endif | {{ Request::segment(1) }}</title>
+        @endif </title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -100,7 +105,7 @@
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="{{url('/indexAnyUserAdvanced')}}" class="logo">
+        <a href="{{route('indexAnyUserAdvanced')}}" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>{{__('pageContent.HotelO')}}</b>{{__('pageContent.HotelEL')}}</span>
             <!-- logo for regular state and mobile devices -->
@@ -186,7 +191,7 @@
 <script src="{{URL::asset('designAnyUserAdvancedPages/main.js')}}"></script>
 
 
-<script src="jquery-3.0.0.min.js"></script>
+<script src="{{URL::asset('jquery-3.0.0.min.js')}}"></script>
 <script>
 
     $(function () {

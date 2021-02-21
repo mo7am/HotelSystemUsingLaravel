@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RoomTypeRequest;
 use App\Models\roomtype;
+use App\Models\roomTypeTranslation;
+use App\Models\roomTranslation;
+
 use App\Providers\RouteServiceProvider;
 use App\Traits\userTraits;
 use Illuminate\Http\Request;
@@ -295,14 +299,820 @@ public function blankPage()
 
     public function index()
     {
-        $alltyperooms = roomtype::orderBy('id' , 'DESC')->paginate(15);
-        return view('AnyUsersAdvancedPages.Pages.crudRoomType' , compact('alltyperooms'));
+        $alltyperooms = roomtype::orderBy('id' , 'ASC')->paginate(5);
+
+        $valueactive = "active";
+        $valueactive2 = "";
+            return view('AnyUsersAdvancedPages.Pages.crudRoomType', compact('alltyperooms','valueactive2' , 'valueactive'));
+
     }
 
 
+    public function store(Request $request){
+
+        try{
+
+
+            DB::beginTransaction();
+
+            if(!$request->has('is_active'))
+                $request->request->add(['is_active'=>'0']);
+            else
+                $request->request->add(['is_active'=>'1']);
+
+
+            $rules = $this->getRules();
+            $message = $this->getMessages();
+            $validator =  Validator::make($request->all(), $rules ,$message );
+
+            if($validator->fails()){
+                return redirect()->back()->withErrors($validator)->withInput($request->all());
+            }
+
+
+
+
+           if(app()->getLocale() == 'ar'){
+              if($request->type == "غرفة كلاسيكية")
+              {
+                  $roomtype = roomtype::create($request->except('_token'));
+                  $roomtype->type = $request->type;
+                  $roomtype->save();
+                  $id = $roomtype->id;
+                     roomTypeTranslation::create([
+                      'roomtype_id' => $id ,
+                      'locale' => 'en' ,
+                      'type' =>'Classic Room' ,
+                  ]);
+              }elseif ($request->type == "غرفة فاخرة")
+              {
+                  $roomtype = roomtype::create($request->except('_token'));
+                  $roomtype->type = $request->type;
+                  $roomtype->save();
+                  $id = $roomtype->id;
+                  roomTypeTranslation::create([
+                      'roomtype_id' => $id ,
+                      'locale' => 'en' ,
+                      'type' =>'Luxury Room' ,
+                  ]);
+              }elseif ($request->type == "غرفه ديلوكس")
+              {
+                  $roomtype = roomtype::create($request->except('_token'));
+                  $roomtype->type = $request->type;
+                  $roomtype->save();
+                  $id = $roomtype->id;
+                  roomTypeTranslation::create([
+                      'roomtype_id' => $id ,
+                      'locale' => 'en' ,
+                      'type' =>'Deluxe Room' ,
+                  ]);
+              }elseif ($request->type == "غرفه متميوة")
+              {
+                  $roomtype = roomtype::create($request->except('_token'));
+                  $roomtype->type = $request->type;
+                  $roomtype->save();
+                  $id = $roomtype->id;
+                  roomTypeTranslation::create([
+                      'roomtype_id' => $id ,
+                      'locale' => 'en' ,
+                      'type' =>'Superior Room' ,
+                  ]);
+              }elseif ($request->type == "جناح")
+              {
+                  $roomtype = roomtype::create($request->except('_token'));
+                  $roomtype->type = $request->type;
+                  $roomtype->save();
+                  $id = $roomtype->id;
+                  roomTypeTranslation::create([
+                      'roomtype_id' => $id ,
+                      'locale' => 'en' ,
+                      'type' =>'Suite' ,
+                  ]);
+              }elseif ($request->type == "غرفة عائليه")
+              {
+                  $roomtype = roomtype::create($request->except('_token'));
+                  $roomtype->type = $request->type;
+                  $roomtype->save();
+                  $id = $roomtype->id;
+                  roomTypeTranslation::create([
+                      'roomtype_id' => $id ,
+                      'locale' => 'en' ,
+                      'type' =>'Family Room' ,
+                  ]);
+              }
+           }elseif (app()->getLocale() == 'en')
+           {
+               if($request->type == "Classic Room")
+               {
+                   $roomtype = roomtype::create($request->except('_token'));
+                   $roomtype->type = $request->type;
+                   $roomtype->save();
+                   $id = $roomtype->id;
+                   roomTypeTranslation::create([
+                       'roomtype_id' => $id ,
+                       'locale' => 'ar' ,
+                       'type' =>'غرفة كلاسيكية' ,
+                   ]);
+               }elseif ($request->type == "Luxury Room")
+               {
+                   $roomtype = roomtype::create($request->except('_token'));
+                   $roomtype->type = $request->type;
+                   $roomtype->save();
+                   $id = $roomtype->id;
+                   roomTypeTranslation::create([
+                       'roomtype_id' => $id ,
+                       'locale' => 'ar' ,
+                       'type' =>'غرفة فاخرة' ,
+                   ]);
+               }elseif ($request->type == "Deluxe Room")
+               {
+                   $roomtype = roomtype::create($request->except('_token'));
+                   $roomtype->type = $request->type;
+                   $roomtype->save();
+                   $id = $roomtype->id;
+                   roomTypeTranslation::create([
+                       'roomtype_id' => $id ,
+                       'locale' => 'ar' ,
+                       'type' =>'غرفه ديلوكس' ,
+                   ]);
+               }elseif ($request->type == "Superior Room")
+               {
+                   $roomtype = roomtype::create($request->except('_token'));
+                   $roomtype->type = $request->type;
+                   $roomtype->save();
+                   $id = $roomtype->id;
+                   roomTypeTranslation::create([
+                       'roomtype_id' => $id ,
+                       'locale' => 'ar' ,
+                       'type' =>'غرفه متميوة' ,
+                   ]);
+               }elseif ($request->type == "Suite")
+               {
+                   $roomtype = roomtype::create($request->except('_token'));
+                   $roomtype->type = $request->type;
+                   $roomtype->save();
+                   $id = $roomtype->id;
+                   roomTypeTranslation::create([
+                       'roomtype_id' => $id ,
+                       'locale' => 'ar' ,
+                       'type' =>'جناح' ,
+                   ]);
+               }elseif ($request->type == "Family Room")
+               {
+                   $roomtype = roomtype::create($request->except('_token'));
+                   $roomtype->type = $request->type;
+                   $roomtype->save();
+                   $id = $roomtype->id;
+                   roomTypeTranslation::create([
+                       'roomtype_id' => $id ,
+                       'locale' => 'ar' ,
+                       'type' =>'غرفة عائليه' ,
+                   ]);
+               }
+           }
+
+            return redirect()->route('RoomType')->with(['success' => 'Added Successfully']);
+
+            DB:commit();
+        }catch(Exception $ex){
+          DB::rollback();
+            return redirect()->route('RoomType')->with(['success' => 'Error Occurs']);
+        }
+
+
+    }
+
+
+
+    public function edit($id){
+
+
+        $roomtype = roomtype::find($id);
+        if(!$roomtype) {
+            $valueactive2 = "active";
+            $valueactive = "";
+            return view('AnyUsersAdvancedPages.Pages.crudRoomType', compact('valueactive2', 'valueactive'))->with(['success' => 'Not Found']);
+        }else{
+            $valueactive2 = "active";
+            $valueactive = "";
+            return view('AnyUsersAdvancedPages.Pages.crudRoomType', compact('roomtype','valueactive2', 'valueactive'))->with(['success' => ' Found']);
+
+        }
+    }
+
+
+
+    public function update(Request $request ){
+
+
+        try{
+
+            DB::beginTransaction();
+
+            $roomtype = roomtype::find($request->id);
+            if(!$roomtype) {
+                return redirect()->route('RoomType')->with(['success' => 'Not Found']);
+            }else {
+                if (!$request->has('is_active'))
+                    $request->request->add(['is_active' => '0']);
+                else
+                    $request->request->add(['is_active' => '1']);
+
+
+                $rules = $this->getRules();
+                $message = $this->getMessages();
+                $validator = Validator::make($request->all(), $rules, $message);
+
+                if ($validator->fails()) {
+                    return redirect()->back()->withErrors($validator)->withInput($request->all());
+                }
+
+
+                if (app()->getLocale() == 'ar') {
+                    if ($request->type == "غرفة كلاسيكية") {
+
+                        $roomtype->update($request->except('_token','id'));
+                        $roomtype->type = $request->type;
+                        $roomtype->save();
+                        $roomTypeTranslation = roomTypeTranslation::where('roomtype_id',$request->id)->get();
+                        foreach ($roomTypeTranslation as $typeroomval)
+                        {
+                            if($typeroomval->locale=='en')
+                            {
+                                $typeroomval->update([
+                                    'type' => 'Classic Room',
+                                ]);
+                            }
+                        }
+                    } elseif ($request->type == "غرفة فاخرة") {
+                        $roomtype->update($request->except('_token','id'));
+                        $roomtype->type = $request->type;
+                        $roomtype->save();
+                        $roomTypeTranslation = roomTypeTranslation::where('roomtype_id',$request->id)->get();
+                        foreach ($roomTypeTranslation as $typeroomval)
+                        {
+                            if($typeroomval->locale=='en')
+                            {
+                                $typeroomval->update([
+                                    'type' => 'Luxury Room',
+                                ]);
+                            }
+                        }
+
+                    } elseif ($request->type == "غرفه ديلوكس") {
+                        $roomtype->update($request->except('_token','id'));
+                        $roomtype->type = $request->type;
+                        $roomtype->save();
+                        $roomTypeTranslation = roomTypeTranslation::where('roomtype_id',$request->id)->get();
+                        foreach ($roomTypeTranslation as $typeroomval)
+                        {
+                            if($typeroomval->locale=='en')
+                            {
+                                $typeroomval->update([
+                                    'type' => 'Deluxe Room',
+                                ]);
+                            }
+                        }
+
+                    } elseif ($request->type == "غرفه متميوة") {
+                        $roomtype->update($request->except('_token','id'));
+                        $roomtype->type = $request->type;
+                        $roomtype->save();
+                        $roomTypeTranslation = roomTypeTranslation::where('roomtype_id',$request->id)->get();
+                        foreach ($roomTypeTranslation as $typeroomval)
+                        {
+                            if($typeroomval->locale=='en')
+                            {
+                                $typeroomval->update([
+                                    'type' => 'Superior Room',
+                                ]);
+                            }
+                        }
+
+                    } elseif ($request->type == "جناح") {
+                        $roomtype->update($request->except('_token','id'));
+                        $roomtype->type = $request->type;
+                        $roomtype->save();
+                        $roomTypeTranslation = roomTypeTranslation::where('roomtype_id',$request->id)->get();
+                        foreach ($roomTypeTranslation as $typeroomval)
+                        {
+                            if($typeroomval->locale=='en')
+                            {
+                                $typeroomval->update([
+                                    'type' => 'Suite',
+                                ]);
+                            }
+                        }
+
+                    } elseif ($request->type == "غرفة عائليه") {
+                        $roomtype->update($request->except('_token','id'));
+                        $roomtype->type = $request->type;
+                        $roomtype->save();
+                        $roomTypeTranslation = roomTypeTranslation::where('roomtype_id',$request->id)->get();
+                        foreach ($roomTypeTranslation as $typeroomval)
+                        {
+                            if($typeroomval->locale=='en')
+                            {
+                                $typeroomval->update([
+                                    'type' => 'Family Room',
+                                ]);
+                            }
+                        }
+
+                    }
+                } elseif (app()->getLocale() == 'en') {
+                    if ($request->type == "Classic Room") {
+                        $roomtype->update($request->except('_token','id'));
+                        $roomtype->type = $request->type;
+                        $roomtype->save();
+                        $roomTypeTranslation = roomTypeTranslation::where('roomtype_id',$request->id)->get();
+                        foreach ($roomTypeTranslation as $typeroomval)
+                        {
+                            if($typeroomval->locale=='ar')
+                            {
+                                $typeroomval->update([
+                                    'type' => 'غرفة كلاسيكية',
+                                ]);
+                            }
+                        }
+
+                    } elseif ($request->type == "Luxury Room") {
+                        $roomtype->update($request->except('_token','id'));
+                        $roomtype->type = $request->type;
+                        $roomtype->save();
+                        $roomTypeTranslation = roomTypeTranslation::where('roomtype_id',$request->id)->get();
+                        foreach ($roomTypeTranslation as $typeroomval)
+                        {
+                            if($typeroomval->locale=='ar')
+                            {
+                                $typeroomval->update([
+                                    'type' => 'غرفة فاخرة',
+                                ]);
+                            }
+                        }
+
+                    } elseif ($request->type == "Deluxe Room") {
+                        $roomtype->update($request->except('_token','id'));
+                        $roomtype->type = $request->type;
+                        $roomtype->save();
+                        $roomTypeTranslation = roomTypeTranslation::where('roomtype_id',$request->id)->get();
+                        foreach ($roomTypeTranslation as $typeroomval)
+                        {
+                            if($typeroomval->locale=='ar')
+                            {
+                                $typeroomval->update([
+                                    'type' => 'غرفه ديلوكس',
+                                ]);
+                            }
+                        }
+
+                    } elseif ($request->type == "Superior Room") {
+                        $roomtype->update($request->except('_token','id'));
+                        $roomtype->type = $request->type;
+                        $roomtype->save();
+                        $roomTypeTranslation = roomTypeTranslation::where('roomtype_id',$request->id)->get();
+                        foreach ($roomTypeTranslation as $typeroomval)
+                        {
+                            if($typeroomval->locale=='ar')
+                            {
+                                $typeroomval->update([
+                                    'type' => 'غرفه متميوة',
+                                ]);
+                            }
+                        }
+
+                    } elseif ($request->type == "Suite") {
+                        $roomtype->update($request->except('_token','id'));
+                        $roomtype->type = $request->type;
+                        $roomtype->save();
+                        $roomTypeTranslation = roomTypeTranslation::where('roomtype_id',$request->id)->get();
+                        foreach ($roomTypeTranslation as $typeroomval)
+                        {
+                            if($typeroomval->locale=='ar')
+                            {
+                                $typeroomval->update([
+                                    'type' => 'جناح',
+                                ]);
+                            }
+                        }
+
+
+                    } elseif ($request->type == "Family Room") {
+                        $roomtype->update($request->except('_token','id'));
+                        $roomtype->type = $request->type;
+                        $roomtype->save();
+                        $roomTypeTranslation = roomTypeTranslation::where('roomtype_id',$request->id)->get();
+                        foreach ($roomTypeTranslation as $typeroomval)
+                        {
+                            if($typeroomval->locale=='ar')
+                            {
+                                $typeroomval->update([
+                                    'type' => 'غرفة عائليه',
+                                ]);
+                            }
+                        }
+
+                    }
+                }
+
+                return redirect()->route('RoomType')->with(['success' => 'Added Successfully']);
+            }
+            DB:commit();
+        }catch(Exception $ex){
+            DB::rollback();
+            return redirect()->route('RoomType')->with(['success' => 'Error Occurs']);
+        }
+
+
+    }
+
+
+    public function delete($id){
+        try {
+
+            DB::beginTransaction();
+            $roomtype = roomtype::find($id);
+            if (!$roomtype) {
+                return redirect()->route('RoomType')->with(['success' => 'Not Found']);
+            } else {
+                $roomtype->delete();
+
+                $roomTypeTranslation = roomTypeTranslation::where('roomtype_id',$id)->get();
+                foreach ($roomTypeTranslation as $typeroomval)
+                {
+                    $typeroomval->delete();
+                }
+                return redirect()->route('RoomType')->with(['success' => 'Deleted Successfully']);
+            }
+            DB:commit();
+        }catch(Exception $ex){
+            DB::rollback();
+            return redirect()->route('RoomType')->with(['success' => 'Error Occurs']);
+        }
+
+    }
+
+    public function getRules(){
+        return $rules = [
+            'type'=>'required|string|max:191',
+            'is_active'=>'required|in:0,1',
+        ];
+    }
+
+    public function getMessages(){
+        return $messages = [
+            'type.required'=>'this field is required',
+            'type.string'=>'this field must be string',
+            'type.max'=>'this field max is 191',
+            'is_active.required'=>'this field is required',
+            'is_active.required'=>'this field must be 0 | 1',
+        ];
+    }
 ////////////////////////////////////End Room Types ////////////////////////////////////
 
 
+//////////////////////////////////// Room  ////////////////////////////////////
+
+
+
+    public function indexRoom()
+    {
+        $allrooms = room::orderBy('id' , 'ASC')->paginate(5);
+
+        $allroomType = roomtype::orderBy('id' , 'ASC')->get();
+        return view('AnyUsersAdvancedPages.Pages.crudRoom', compact('allrooms','allroomType'));
+
+    }
+
+    public function getLanguage($id = 0)
+    {
+
+        try{
+
+
+            DB::beginTransaction();
+
+            $allroomLanguage = roomTranslation::where('room_id' , $id)->get();
+            if(!$allroomLanguage) {
+                // return 0;
+                return redirect()->route('Manager.Room.Room')->with(['error' => 'Not Found']);
+            }else {
+
+                // Fetch all records
+                $roomLanguage['data'] = $allroomLanguage;
+
+                echo json_encode($roomLanguage);
+                exit;
+        }
+            DB:commit();
+        }catch(Exception $ex){
+DB::rollback();
+return redirect()->route('Manager.Room.Room')->with(['error' => 'Error Occurs']);
+}
+
+    }
+
+
+    public function storeLanguage(Request $request)
+    {
+
+
+        try{
+
+
+            DB::beginTransaction();
+
+             $locale = "";
+            $room = room::where('id' , $request->id)->get();
+            if(!$room) {
+                // return 0;
+                return redirect()->route('Manager.Room.Room')->with(['error' => 'Not Found']);
+            }else {
+
+                $roomTranslation = roomTranslation::where('room_id',$request->id)->get();
+                foreach ($roomTranslation as $roomval)
+                {
+                  $locale = $roomval->locale;
+                }
+
+                if($locale == "en"){
+                        roomTranslation::create([
+                        'room_id' => $request->id ,
+                        'locale' => "ar" ,
+                        'price_per' => $request->price_per ,
+                        'RoomView' => $request->RoomView ,
+                    ]);
+                }elseif ($locale == "ar"){
+                    roomTranslation::create([
+                        'room_id' => $request->id ,
+                        'locale' => "en" ,
+                        'price_per' => $request->price_per ,
+                        'RoomView' => $request->RoomView ,
+                    ]);
+                }
+                return Response()->json(["result" => true, "data" => $room, "success" => "Room Language Added Successfully "]);
+                // Fetch all records
+
+            }
+            DB:commit();
+        }catch(Exception $ex){
+            DB::rollback();
+            return redirect()->route('Manager.Room.Room')->with(['error' => 'Error Occurs']);
+        }
+
+    }
+
+
+    public function storeRoom(Request $request){
+
+        try{
+
+
+            DB::beginTransaction();
+
+            if(!$request->has('is_active'))
+                $request->request->add(['is_active'=>'0']);
+            else
+                $request->request->add(['is_active'=>'1']);
+
+
+            $rules = $this->getRulesRoom();
+            $validator =  Validator::make($request->all(), $rules  );
+
+            if($validator->fails()){
+                return redirect()->back()->withErrors($validator)->withInput($request->all());
+            }else{
+                $imageName = "";
+                $roomtype_id = 0;
+                if($request->has('image')){
+                    $imageName = time() . '.' . request()->image->getClientOriginalExtension();
+                    $input['image'] = $imageName;
+                    request()->image->move(public_path('images/rooms'), $imageName);
+                }
+
+                if (app()->getLocale() == 'en') {
+                    if($request->type == 'Classic Room'){
+                        $roomtype_id = 1;
+                    }elseif ($request->type == 'Luxury Room'){
+                        $roomtype_id = 2;
+                    }elseif ($request->type == 'Deluxe Room'){
+                        $roomtype_id = 3;
+                    }elseif ($request->type == 'Superior Room'){
+                        $roomtype_id = 4;
+                    }elseif ($request->type == 'Suite'){
+                        $roomtype_id = 5;
+                    }elseif ($request->type == 'Family Room'){
+                        $roomtype_id = 6;
+                    }
+
+                }elseif (app()->getLocale() == 'ar'){
+                    if($request->type == 'غرفة كلاسيكية'){
+                        $roomtype_id = 1;
+                    }elseif ($request->type == 'غرفة فاخرة'){
+                        $roomtype_id = 2;
+                    }elseif ($request->type == 'غرفه ديلوكس'){
+                        $roomtype_id = 3;
+                    }elseif ($request->type == 'غرفه متميوة'){
+                        $roomtype_id = 4;
+                    }elseif ($request->type == 'جناح'){
+                        $roomtype_id = 5;
+                    }elseif ($request->type == 'غرفة عائليه'){
+                        $roomtype_id = 6;
+                    }
+                }
+
+                $room =  room::create([
+                    'roomtype_id' => $roomtype_id ,
+                    'state_id' => 1 ,
+
+                    'state_clean_id' => 5 ,
+                    'price' => $request->price ,
+                    'MaximumPerson' => $request->MaximumPerson ,
+                    'RoomSize' =>  $request->RoomSize,
+                    'BedNumber' => $request->BedNumber,
+                    'image' => $imageName,
+                    'is_active' =>  $request->is_active,
+                ]);
+
+                $room->price_per = $request->price_per;
+                $room->RoomView = $request->RoomView;
+
+
+                $room->save();
+
+                return Response()->json(["result" => true, "data" => $room, "success" => "Room Added Successfully "]);
+               /* $allrooms = room::orderBy('id' , 'ASC')->paginate(PAGINATION_COUNT);
+                $allroomType = roomtype::orderBy('id' , 'ASC')->get();
+                return view('AnyUsersAdvancedPages.Pages.crudRoom', compact('allrooms','allroomType'));*/
+
+            }
+
+            DB:commit();
+        }catch(Exception $ex){
+            DB::rollback();
+            return redirect()->route('Manager.Room.Room')->with(['error' => 'Error Occurs']);
+        }
+
+
+
+
+        }
+
+
+
+    public function updateRoom(Request $request){
+
+
+        try{
+
+
+            DB::beginTransaction();
+
+            $room = room::find($request->id);
+            if(!$room) {
+               // return 0;
+                return redirect()->route('Manager.Room.Room')->with(['error' => 'Not Found']);
+            }else {
+
+                    if($request->price_per==null && $request->RoomView==null &&$request->image==null){
+                        $room->update([
+                            'price' => $request->price,
+                            'MaximumPerson' => $request->MaximumPerson,
+                            'RoomSize' => $request->RoomSize,
+                            'BedNumber' => $request->BedNumber,
+                            'image' => $request->img,
+                        ]);
+                    }else{
+                        if($request->has('image')) {
+                            $imageName = time() . '.' . request()->image->getClientOriginalExtension();
+                            $input['image'] = $imageName;
+                            request()->image->move(public_path('images/rooms'), $imageName);
+
+                            $room->update([
+                                'price' => $request->price,
+                                'MaximumPerson' => $request->MaximumPerson,
+                                'RoomSize' => $request->RoomSize,
+                                'BedNumber' => $request->BedNumber,
+                                'image' => $imageName,
+                            ]);
+                            $room->price_per = $request->price_per;
+                            $room->RoomView = $request->RoomView;
+                            $room->save();
+                        }else{
+                            $room->update([
+                                'price' => $request->price,
+                                'MaximumPerson' => $request->MaximumPerson,
+                                'RoomSize' => $request->RoomSize,
+                                'BedNumber' => $request->BedNumber,
+                            ]);
+                            $room->price_per = $request->price_per;
+                            $room->RoomView = $request->RoomView;
+                            $room->save();
+                        }
+                    }
+                   // return 2;
+                    //return redirect()->route('Manager.Room.Room')->with(['success' => 'Updated Successfully']);
+                return Response()->json(["result" => true, "data" => $room, "success" => "Room Updated Successfully "]);
+
+            }
+            DB:commit();
+        }catch(Exception $ex){
+            DB::rollback();
+           // return 3;
+            return redirect()->route('Manager.Room.Room')->with(['error' => 'Error Occurs']);
+        }
+
+
+
+
+    }
+
+
+    public function deleteRoom(Request $request){
+        try {
+
+            DB::beginTransaction();
+            $room = room::find($request->id);
+            if (!$room) {
+                return Response()->json(["result" => true, "error" => "Room Not Found"]);
+
+            } else {
+                $room->delete();
+
+                $roomTranslation = roomTranslation::where('room_id',$request->id)->get();
+                foreach ($roomTranslation as $roomval)
+                {
+                    $roomval->delete();
+                }
+                return Response()->json(["result" => true, "success" => "Room Deleted Successfully"]);
+
+            }
+            DB:commit();
+        }catch(Exception $ex){
+            DB::rollback();
+            return Response()->json(["result" => true, "error" => "Error Occurs"]);
+        }
+
+    }
+
+
+    public function activationRoom(Request $request){
+
+        try {
+
+            DB::beginTransaction();
+            $room = room::find($request->id);
+            if (!$room) {
+                return Response()->json(["result" => true, "error" => "Room Not Found"]);
+
+            } else {
+                if($room->is_active ==0) {
+                    $room->update([
+                        'is_active' => 1,
+                    ]);
+                }else{
+                    $room->update([
+                        'is_active' => 0,
+                    ]);
+                }
+
+                return Response()->json(["result" => true, "data"=> $room,"success" => "Activated Successfully"]);
+
+            }
+            DB:commit();
+        }catch(Exception $ex){
+            DB::rollback();
+            return Response()->json(["result" => true, "error" => "Error Occurs"]);
+        }
+
+    }
+
+
+
+    public function getRulesRoom(){
+        return $rules = [
+            'RoomView'=>'required_without:id|string|max:191',
+            'is_active'=>'required|in:0,1',
+            'price'=>'required',
+            'MaximumPerson'=>'required',
+            'RoomSize'=>'required',
+            'BedNumber'=>'required',
+            'image'=>'required_without:id|mimes:jpg,jpeg,png',
+            'price_per'=>'required_without:id|string|max:191',
+
+        ];
+    }
+
+   /* public function getMessagesRoom(){
+        return $messages = [
+            'required'=>'this field is required',
+            'type.string'=>'this field must be string',
+            'type.max'=>'this field max is 191',
+            'is_active.required'=>'this field is required',
+            'is_active.required'=>'this field must be 0 | 1',
+        ];
+    }*/
+////////////////////////////////////End Room  ////////////////////////////////////
 
 
 
